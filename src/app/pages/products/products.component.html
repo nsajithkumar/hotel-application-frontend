@@ -1,0 +1,103 @@
+<div class="container mt-5" id="productsPage">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="mb-3 font-weight-bold text-center">Add Product</div>
+            <form #productsForm>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepand">
+                        <span class="input-group-text"><font color="black"><i class="fas fa-signature"></i></font></span>
+                    </div>
+                    <input type="text" #productName name="productName" class="form-control" placeholder="Product Name" required />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepand">
+                        <span class="input-group-text pl-3 pr-3"><font color="black"><i class="fas fa-rupee-sign"></i></font></span>
+                    </div>
+                    <input type="number" #amount name="amount" class="form-control" placeholder="Amount" required />
+                </div>
+                <textarea #description name="description" rows="3" class="form-control mb-3" placeholder="Description"></textarea>
+                <input #productPic type="file" name="productPic" required />
+                <div #productsResponse class="text-danger text-center mb-2"></div>
+                <button #productsSubmit type="submit" name="productsSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
+                <button #productsReset type="reset" name="productsReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="mb-3 font-weight-bold text-center">Added Products</div>
+            <div #processStatus class="text-center">Processing...</div>
+            <div class="table-responsive" *ngIf="productsArray.length != 0">
+                <table class="table table-hover table-sm table-bordered text-center">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="font-weight-bold">S.No</th>
+                            <th class="font-weight-bold">Product Name</th>
+                            <th class="font-weight-bold">Amount</th>
+                            <th class="font-weight-bold">Description</th>
+                            <th class="font-weight-bold">Added On</th>
+                            <th class="font-weight-bold">Updated On</th>
+                            <th class="font-weight-bold">Edit</th>
+                            <th class="font-weight-bold">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of productsArray; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.price}}</td>
+                            <td  *ngIf="product.description != null">{{product.description}}</td>
+                            <td  *ngIf="product.description == null">-</td>
+                            <td>{{product.createdOn}}</td>
+                            <td>{{product.updatedOn}}</td>
+                            <td><span data-target="#updateProduct" data-toggle="modal" (click)="editProduct(product)"><i class="fas fa-edit"></i></span></td>
+                            <td><span (click)="deleteProduct(product)"><i class="fas fa-trash-alt"></i></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateProduct" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Customer</h5>
+          <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #modalForm>
+            <div class="modal-body">
+                <input type="text" #modelProductId name="modalProductId" hidden />
+                <div class="input-group mb-3">
+                    <div class="input-group-prepand">
+                        <span class="input-group-text"><font color="black"><i class="fas fa-user"></i></font></span>
+                    </div>
+                    <input type="text" #modalPname name="modalPname" class="form-control" placeholder="Product Name" required />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepand">
+                        <span class="input-group-text pl-3 pr-3"><font color="black"><i class="fas fa-mobile"></i></font></span>
+                    </div>
+                    <input type="number" #modalPrice name="modalPrice" class="form-control" placeholder="Price" required />
+                </div>
+                <textarea name="modalDescription" #modalDescription class="form-control mb-3" rows="3" placeholder="Description"></textarea>
+                <div #modalResponse class="text-center text-danger"></div>
+            </div>
+            <div class="modal-footer">
+                <button #modalSubmit type="submit" class="btn btn-sm btn-purple">Proceed</button>
+                <button #modalReset type="reset" class="btn btn-sm btn-purple">Reset</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>

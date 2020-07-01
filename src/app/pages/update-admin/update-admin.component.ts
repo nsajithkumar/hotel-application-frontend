@@ -1,0 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-update-admin',
+  templateUrl: './update-admin.component.html',
+  styleUrls: ['./update-admin.component.scss']
+})
+export class UpdateAdminComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  public updateAdminSubmit() {
+    console.log("update Admin");
+  }
+  
+}
