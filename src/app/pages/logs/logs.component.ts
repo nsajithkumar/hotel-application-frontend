@@ -14,6 +14,7 @@ export class LogsComponent implements OnInit {
   @ViewChild('processStatus', {static: true}) pStatus: ElementRef;
 
   logsArray = [];
+
   constructor(public logServices: LogService) { 
 
     this.role = sessionStorage.getItem('role');
@@ -29,7 +30,12 @@ export class LogsComponent implements OnInit {
         this.pStatus.nativeElement.innerText = "";
         this.logsArray = res.logs;
       }
-    });
+      // console.log(res.logs);
+    }, (error) => {
+      this.pStatus.nativeElement.innerText = "Oops! Error Occured, Please Try Again Later.";
+      // console.log(error);
+    }
+    );
   }
 
   ngOnInit(): void {
