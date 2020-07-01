@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from '../../services/profiles/profile.service';
+import { LogService } from '../../services/logs/log.service';
  
 @Component({
   selector: 'app-authentication',
@@ -32,7 +33,7 @@ export class AuthenticationComponent implements OnInit {
   @ViewChild('forgetPasswordResponse', {static: true}) forgetPassResp: ElementRef;
   @ViewChild('forgetPasswordReset', {static: true}) forgetPassReset: ElementRef;
 
-  constructor(public profileServices: ProfileService) { }
+  constructor(public profileServices: ProfileService, public logServices: LogService) { }
 
   ngOnInit(): void {
 
@@ -53,6 +54,28 @@ export class AuthenticationComponent implements OnInit {
         (res: any) => {
   
           if(res.status === 200) {
+
+            let data = {
+              customerId: res.profileId,
+              customerName: res.username
+            }
+        
+            this.logServices.create(data).subscribe(
+              (res: any) => {
+                if(res.status === 200) {
+                  sessionStorage.setItem('sessionId', res.logId);
+                } else {
+                  sessionStorage.clear();
+                  alert("Oops! Problem Occured, Please Try Again Later.");
+                  setTimeout(() => {
+                    location.href = "/";
+                  }, 1000);
+                }
+                // console.log(res);
+              }, (error) => {
+                // console.log(error);
+              }
+            );
 
             sessionStorage.setItem('profileId', res.profileId);
             sessionStorage.setItem('name', res.username);
@@ -95,6 +118,31 @@ export class AuthenticationComponent implements OnInit {
       this.profileServices.read(data).subscribe(
         (res: any) => {
           if(res.status === 200) {
+
+            if(res.profile.role == "0") {
+
+              let data = {
+                customerId: res.profile._id,
+                customerName: res.profile.username
+              }
+          
+              this.logServices.create(data).subscribe(
+                (res: any) => {
+                  if(res.status === 200) {
+                    sessionStorage.setItem('sessionId', res.logId);
+                  } else {
+                    sessionStorage.clear();
+                    alert("Oops! Problem Occured, Please Try Again Later.");
+                    setTimeout(() => {
+                      location.href = "/";
+                    }, 1000);
+                  }
+                  // console.log(res);
+                }, (error) => {
+                  // console.log(error);
+                }
+              );
+            }
 
             sessionStorage.setItem('profileId', res.profile._id);
             sessionStorage.setItem('name', res.profile.username);

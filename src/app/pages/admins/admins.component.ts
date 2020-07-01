@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ProfileService } from '../../services/profiles/profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admins',
@@ -29,17 +30,20 @@ export class AdminsComponent implements OnInit {
   @ViewChild('modalReset', {static: true}) mReset: ElementRef;
   @ViewChild('modalClose', {static: true}) mClose: ElementRef;
 
+  @ViewChild('refershLink', {static: true}) rLink: ElementRef;
+
   adminsArray = [];
   role: string;
 
-  constructor(public profileServices: ProfileService) {
+  constructor(public profileServices: ProfileService, public router: Router) {
     this.role = sessionStorage.getItem('role');
-    if(this.role == "0") {
+
+    if(this.role == "0" || this.role == "1" || this.role == undefined) {
       location.href = "/";
     }
 
     let data = {
-      role: this.role
+      role: 1
     }
 
     this.profileServices.read(data).subscribe((res: any) => {
@@ -77,8 +81,15 @@ export class AdminsComponent implements OnInit {
         (res: any) => {
   
           if(res.status === 200) {
+
             this.adResp.nativeElement.innerText = "Added Succesfully";
             this.adReset.nativeElement.click();
+
+            setTimeout(() => {
+              this.adResp.nativeElement.innerText = "";
+              location.href = "/admins";
+            }, 1000);
+
           } else if(res.status === 201) {
             this.adResp.nativeElement.innerText = "E-Mail/Mobile Number is Already Registered.";
           } else {
@@ -106,10 +117,13 @@ export class AdminsComponent implements OnInit {
   
       this.profileServices.update(data).subscribe((res: any) => {
         if(res.status === 200) {
-          this.mResp.nativeElement.innerText = "Updated Successfully!";
+          this.mResp.nativeElement.innerText = "Updated Successfully";
           setTimeout(() => {
             this.mClose.nativeElement.click();
+            this.mResp.nativeElement.innerText = "";
+            location.href = "/admins";
           }, 1000);
+          
         } else {
           this.mResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
         }
@@ -195,7 +209,7 @@ export class AdminsComponent implements OnInit {
 
       this.profileServices.delete(data).subscribe((res: any) => {
         if(res.status === 200) {
-          alert("Removed Successfully");
+          location.href = "/admins";
         } else {
           alert("Not Removed");
         }

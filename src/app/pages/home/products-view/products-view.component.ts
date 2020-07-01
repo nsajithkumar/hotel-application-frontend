@@ -111,6 +111,7 @@ export class ProductsViewComponent implements OnInit {
         if(res.status === 200) {
           this.mResp.nativeElement.innerText = "Order Placed Successfully!";
           setTimeout(() => {
+            this.cartArray = [];
             this.mResp.nativeElement.innerText = "";
             this.mClose.nativeElement.click();
           }, 1000);

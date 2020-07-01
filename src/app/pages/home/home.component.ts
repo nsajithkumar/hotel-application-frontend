@@ -11,6 +11,11 @@ export class HomeComponent implements OnInit {
 
   constructor() { 
     this.role = sessionStorage.getItem('role');
+
+    if(this.role == undefined) {
+      location.href = "/";
+    }
+
   }
 
   ngOnInit(): void {

@@ -18,9 +18,9 @@ export class MyordersComponent implements OnInit {
   constructor(public orderServices: OrderService) { 
 
     this.role = sessionStorage.getItem('role');
-    this.customerId = sessionStorage.getItem('customerId');
+    this.customerId = sessionStorage.getItem('profileId');
 
-    if(this.role == "1" || this.role == "2") {
+    if(this.role == "1" || this.role == "2" || this.role == undefined) {
       location.href = "/";
     }
 
@@ -30,6 +30,7 @@ export class MyordersComponent implements OnInit {
     
     this.orderServices.read(data).subscribe(
       (res: any) => {
+
         if(res.status === 200) {
           this.pResp.nativeElement.innerText = "";
           this.ordersArray = res.orders;

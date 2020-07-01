@@ -35,12 +35,13 @@ export class CustomersComponent implements OnInit {
   constructor(public profileServices: ProfileService) {
 
     this.role = sessionStorage.getItem('role');
-    if(this.role == "0") {
+
+    if(this.role == "0" || this.role == undefined) {
       location.href = "/";
     }
 
     let data = {
-      role: this.role
+      role: 0
     }
 
     this.profileServices.read(data).subscribe((res: any) => {
@@ -78,8 +79,15 @@ export class CustomersComponent implements OnInit {
         (res: any) => {
   
           if(res.status === 200) {
+
             this.cusResp.nativeElement.innerText = "Added Succesfully";
             this.cusReset.nativeElement.click();
+
+            setTimeout(() => {
+              this.cusResp.nativeElement.innerText = "";
+              location.href = "/customers";
+            }, 1000);
+
           } else if(res.status === 201) {
             this.cusResp.nativeElement.innerText = "E-Mail/Mobile Number is Already Registered.";
           } else {
@@ -111,6 +119,8 @@ export class CustomersComponent implements OnInit {
           this.mResp.nativeElement.innerText = "Updated Successfully!";
           setTimeout(() => {
             this.mClose.nativeElement.click();
+            this.mResp.nativeElement.innerText = "";
+            location.href = "/customers";
           }, 1000);
         } else {
           this.mResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
@@ -197,7 +207,7 @@ export class CustomersComponent implements OnInit {
 
       this.profileServices.delete(data).subscribe((res: any) => {
         if(res.status === 200) {
-          alert("Removed Successfully");
+          location.href = "/customers";
         } else {
           alert("Not Removed");
         }

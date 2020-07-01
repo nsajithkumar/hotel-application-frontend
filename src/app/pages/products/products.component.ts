@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
 
     this.role = sessionStorage.getItem('role');
 
-    if(this.role == "0" || this.role == "2") {
+    if(this.role == "0" || this.role == "2" || this.role == undefined) {
       location.href = "/";
     }
 
@@ -83,8 +83,15 @@ export class ProductsComponent implements OnInit {
         (res: any) => {
   
           if(res.status === 200) {
+
             this.proResp.nativeElement.innerText = "Added Succesfully";
             this.proReset.nativeElement.click();
+
+            setTimeout(() => {
+              this.proResp.nativeElement.innerText = "";
+              location.href = "/products";
+            }, 1000);
+
           } else {
             this.proResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
           }
@@ -114,6 +121,8 @@ export class ProductsComponent implements OnInit {
           this.mResp.nativeElement.innerText = "Updated Successfully!";
           setTimeout(() => {
             this.mClose.nativeElement.click();
+            this.mResp.nativeElement.innerText = "";
+            location.href = "/products";
           }, 1000);
         } else {
           this.mResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
@@ -144,7 +153,7 @@ export class ProductsComponent implements OnInit {
 
       this.productServices.delete(data).subscribe((res: any) => {
         if(res.status === 200) {
-          alert("Removed Successfully");
+          location.href = "/products";
         } else {
           alert("Not Removed");
         }

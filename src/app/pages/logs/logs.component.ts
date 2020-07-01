@@ -18,7 +18,7 @@ export class LogsComponent implements OnInit {
 
     this.role = sessionStorage.getItem('role');
 
-    if(this.role == "0") {
+    if(this.role == "0" || this.role == undefined) {
       location.href = "/";
     }
     
