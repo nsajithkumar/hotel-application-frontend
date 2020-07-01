@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="text-center font-weight-bold mt-5 mb-3">My Orders</div>
+            <div #processResponse class="text-center">Progressing...</div>
+            <div class="table-responsive" *ngIf="ordersArray.length != 0">
+                <table class="table table-sm table-hover table-bordered text-center">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="font-weight-bold">S.No</th>
+                            <th class="font-weight-bold">Product Name</th>
+                            <th class="font-weight-bold">Quantity</th>
+                            <th class="font-weight-bold">Amount</th>
+                            <th class="font-weight-bold">Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of ordersArray;let i=index;">
+                            <td>{{i+1}}</td>
+                            <td>{{order.productName}}</td>
+                            <td>{{order.productQuantity}}</td>
+                            <td>{{order.productAmount}}</td>
+                            <td>{{calculateSum(order.productAmount)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

@@ -17,7 +17,7 @@
                     <input type="number" #amount name="amount" class="form-control" placeholder="Amount" required />
                 </div>
                 <textarea #description name="description" rows="3" class="form-control mb-3" placeholder="Description"></textarea>
-                <input #productPic type="file" name="productPic" required />
+                <input #productPic type="file" name="productPic" class="mb-3" required />
                 <div #productsResponse class="text-danger text-center mb-2"></div>
                 <button #productsSubmit type="submit" name="productsSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
                 <button #productsReset type="reset" name="productsReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
@@ -50,8 +50,8 @@
                             <td>{{i+1}}</td>
                             <td>{{product.name}}</td>
                             <td>{{product.price}}</td>
-                            <td  *ngIf="product.description != null">{{product.description}}</td>
-                            <td  *ngIf="product.description == null">-</td>
+                            <td  *ngIf="product.description != ''">{{product.description}}</td>
+                            <td  *ngIf="product.description == ''">-</td>
                             <td>{{product.createdOn}}</td>
                             <td>{{product.updatedOn}}</td>
                             <td><span data-target="#updateProduct" data-toggle="modal" (click)="editProduct(product)"><i class="fas fa-edit"></i></span></td>
@@ -75,7 +75,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form #modalForm>
+        <form #modalForm enctype="multipart/form-data">
             <div class="modal-body">
                 <input type="text" #modelProductId name="modalProductId" hidden />
                 <div class="input-group mb-3">

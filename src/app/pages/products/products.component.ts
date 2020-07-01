@@ -32,15 +32,31 @@ export class ProductsComponent implements OnInit {
 
   productsArray = [];
 
+  role:string;
+
   constructor(public productServices: ProductService) { 
+
+    this.role = sessionStorage.getItem('role');
+
+    if(this.role == "0" || this.role == "2") {
+      location.href = "/";
+    }
+
     this.productServices.readAll().subscribe((res: any) => {
       if(res.status === 404) {
         this.pStatus.nativeElement.innerText = "No Products Found";
-      } else {
+      } else if(res.status === 200) {
         this.pStatus.nativeElement.innerText = "";
         this.productsArray = res.products;
+      } else {
+        this.pStatus.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
       }
-    });
+      // console.log(res);
+    }, (error) => {
+      this.pStatus.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
+      // console.log(error);
+    }
+    );
   }
 
   ngOnInit(): void {
@@ -49,15 +65,19 @@ export class ProductsComponent implements OnInit {
 
       this.proResp.nativeElement.innerText = "Processing...";
 
-      let randomNumber = Math.floor(Math.random() * Math.floor(100000));
-      let pic = this.proName.nativeElement.value + randomNumber;
+      // let randomNumber = Math.floor(Math.random() * Math.floor(100000));
+      // let pic = this.proName.nativeElement.value + randomNumber;
+
+      var image = this.proPic.nativeElement.files[0].name;
 
       let data = {
         name: this.proName.nativeElement.value,
         price: this.proAmount.nativeElement.value,
         description: this.proDescription.nativeElement.value,
-        image: pic,
+        image: image,
       };
+
+      // console.log(data);
 
       this.productServices.create(data).subscribe(
         (res: any) => {

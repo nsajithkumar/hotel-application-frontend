@@ -1,0 +1,82 @@
+<div class="text-center font-weight-bold mt-5 mb-3">Products</div>
+
+<div #processResponse class="text-center">Progressing...</div>
+
+<div *ngIf="productsArray.length != 0">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="table-responsive">
+                <button data-target="#placeOrder" data-toggle="modal" class="btn btn-sm btn-dark rounded mb-3 ml-0"><i class="fas fa-shopping-cart"></i>  My Cart</button>
+                <table class="table table-sm table-hover table-bordered text-center">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="font-weight-bold">S.No</th>
+                            <th class="font-weight-bold">Name</th>
+                            <th class="font-weight-bold">Description</th>
+                            <th class="font-weight-bold">Price</th>
+                            <th class="font-weight-bold">Add to Cart</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of productsArray;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{product.name}}</td>
+                            <td *ngIf="product.description != ''">{{product.description}}</td>
+                            <td *ngIf="product.description == ''">-</td>
+                            <td>{{product.price}}</td>
+                            <td><span (click)="addToCart(product)"><i class="fas fa-cart-plus"></i></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="placeOrder" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Place Order</h5>
+          <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div *ngIf="cartArray.length == 0" class="text-center">No Products Selected</div>
+            <div *ngIf="cartArray.length != 0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover table-bordered text-center">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="font-weight-bold">S.No</th>
+                                <th class="font-weight-bold">Name</th>
+                                <th class="font-weight-bold">Quantity</th>
+                                <th class="font-weight-bold">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cart of cartArray;let i=index;">
+                                <td>{{i+1}}</td>
+                                <td>{{cart.productName}}</td>
+                                <td>{{cart.quantity}}</td>
+                                <td>{{cart.price}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mb-2">Total Amount : {{totalAmount}}</div>
+            </div>  
+            <div #modalResponse class="text-center text-danger"></div>
+        </div>
+        <div class="modal-footer">
+            <button *ngIf="cartArray.length != 0" (click)="placeOrder()" type="button" class="btn btn-sm btn-purple">Place Order</button>
+        </div>
+      </div>
+    </div>
+</div>

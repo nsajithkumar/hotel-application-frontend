@@ -30,19 +30,33 @@ export class AdminsComponent implements OnInit {
   @ViewChild('modalClose', {static: true}) mClose: ElementRef;
 
   adminsArray = [];
+  role: string;
+
   constructor(public profileServices: ProfileService) {
+    this.role = sessionStorage.getItem('role');
+    if(this.role == "0") {
+      location.href = "/";
+    }
+
     let data = {
-      role: 1
+      role: this.role
     }
 
     this.profileServices.read(data).subscribe((res: any) => {
       if(res.status === 404) {
         this.pStatus.nativeElement.innerText = "No Profiles Found";
-      } else {
+      } else if(res.status === 200) {
         this.pStatus.nativeElement.innerText = "";
         this.adminsArray = res.profiles;
+      } else {
+        this.pStatus.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
       }
-    });
+      // console.log(res);
+    }, (error) => {
+      this.pStatus.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
+      // console.log(error);
+    }
+    );
   }
 
   ngOnInit(): void {

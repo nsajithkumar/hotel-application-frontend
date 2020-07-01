@@ -53,8 +53,20 @@ export class AuthenticationComponent implements OnInit {
         (res: any) => {
   
           if(res.status === 200) {
+
+            sessionStorage.setItem('profileId', res.profileId);
+            sessionStorage.setItem('name', res.username);
+            sessionStorage.setItem('emailId', res.emailId);
+            sessionStorage.setItem('role', "0");
+
             this.regResp.nativeElement.innerText = "Registered Succesfully";
             this.regReset.nativeElement.click();
+
+            setTimeout(() => {
+              this.logResp.nativeElement.innerText = "";
+              location.href = "/home";
+            }, 1000);
+
           } else if(res.status === 201) {
             this.regResp.nativeElement.innerText = "E-Mail/Mobile Number is Already Registered.";
           } else {
@@ -83,8 +95,20 @@ export class AuthenticationComponent implements OnInit {
       this.profileServices.read(data).subscribe(
         (res: any) => {
           if(res.status === 200) {
+
+            sessionStorage.setItem('profileId', res.profile._id);
+            sessionStorage.setItem('name', res.profile.username);
+            sessionStorage.setItem('emailId', res.profile.emailId);
+            sessionStorage.setItem('role', res.profile.role);
+
             this.logResp.nativeElement.innerText = "Login Succesfull";
             this.logReset.nativeElement.click();
+
+            setTimeout(() => {
+              this.logResp.nativeElement.innerText = "";
+              location.href = "/home";
+            }, 1000);
+
           } else if(res.status === 404) {
             this.logResp.nativeElement.innerText = "Invalid E-Mail ID and Password.";
           } else {

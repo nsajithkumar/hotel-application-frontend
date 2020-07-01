@@ -11,9 +11,10 @@ import { CustomersComponent } from './pages/customers/customers.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { UpdateAdminComponent } from './pages/update-admin/update-admin.component';
-import { UpdateCustomerComponent } from './pages/update-customer/update-customer.component';
-import { UpdateProductComponent } from './pages/update-product/update-product.component';
+import { OrdersComponent } from './pages/home/orders/orders.component';
+import { ProductsViewComponent } from './pages/home/products-view/products-view.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { MyordersComponent } from './pages/myorders/myorders.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,10 @@ import { UpdateProductComponent } from './pages/update-product/update-product.co
     LogsComponent,
     HomeComponent,
     ProductsComponent,
-    UpdateAdminComponent,
-    UpdateCustomerComponent,
-    UpdateProductComponent
+    OrdersComponent,
+    ProductsViewComponent,
+    HeaderComponent,
+    MyordersComponent
   ],
   imports: [
     BrowserModule,
