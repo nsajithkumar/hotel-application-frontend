@@ -1,84 +1,33 @@
 <div class="container" id="authenticationPage">
+
     <div class="row">
+
         <div class="col-md-1"></div>
+
         <div class="col-md-4 registerFields">
             <div class="font-weight-bold">Not Registered ?</div>
             <div class="mt-3 mb-3">Sign Up with your E-Mail ID and Password</div>
-            <form #registerForm>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text"><font color="black"><i class="fas fa-user"></i></font></span>
-                    </div>
-                    <input type="text" name="username" #username class="form-control" placeholder="Username" required />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text"><font color="black"><i class="fas fa-at"></i></font></span>
-                    </div>
-                    <input type="email" name="email" #email class="form-control" placeholder="E-Mail ID" required />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text pl-3 pr-3"><font color="black"><i class="fas fa-mobile"></i></font></span>
-                    </div>
-                    <input type="number" (input)="mobileNumberHandler()" name="mobileNumber" #mobileNumber class="form-control" placeholder="Mobile Number" />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text "><font color="black"><i class="fas fa-key"></i></font></span>
-                    </div>
-                    <input type="password" (input)="passwordHandler()" name="password" #password class="form-control" placeholder="Password" required />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text"><font color="black"><i class="fas fa-key"></i></font></span>
-                    </div>
-                    <input type="password" (input)="passwordHandler()" name="confirmPassword" #confirmPassword class="form-control" placeholder="Confirm Password" required />
-                </div>
-                <div #registerResponse class="text-danger text-center mb-2"></div>
-                <button #registerSubmit type="submit" name="registerSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
-                <button #registerReset type="reset" name="registerReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
-            </form>
+            <app-register></app-register>
         </div>
+
         <div class="col-md-2"></div>
+
         <div class="col-md-4 loginFields" #loginFields>
             <div class="font-weight-bold" style="margin-top: 70px;">Already Registered ?</div>
             <div class="mt-3 mb-3">Sign In with your E-Mail ID and Password</div>
-            <form #loginForm>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text"><font color="black"><i class="fas fa-user"></i></font></span>
-                    </div>
-                    <input type="email" #loginEmailId name="loginEmailId" class="form-control" placeholder="E-Mail Id" required />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text"><font color="black"><i class="fas fa-lock"></i></font></span>
-                    </div>
-                    <input type="password" #loginPassword name="loginPassword" class="form-control" placeholder="Password" required />
-                </div>
-                <div #loginResponse class="text-danger text-center mb-2"></div>
-                <button type="submit" id="loginSubmit" name="loginSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
-                <button #loginReset type="reset" name="loginReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
-            </form>
+            <app-login></app-login>
             <button type="button" (click)="pushForgetPassword()" id="forgetPasswordLink" name="forgetPasswordLink" class="mt-2 btn btn-md btn-link ml-0 p-0 font-weight-bold" style="color: #0d47a1;font-size: 13px;">Click Here to Reset Password</button>
         </div>
+
         <div class="col-md-4 forgetPasswordFields hide" #forgetPasswordFields>
             <div class="font-weight-bold" style="margin-top: 100px;">Forget Password ?</div>
             <div class="mt-3 mb-3">Get Password Reset Link</div>
-            <form #forgetPasswordForm>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepand">
-                        <span class="input-group-text"><font color="black"><i class="fas fa-at"></i></font></span>
-                    </div>
-                    <input type="email" #forgetPasswordEmailId name="forgetPasswordEmailId" class="form-control" placeholder="E-Mail Id" required />
-                </div>
-                <div #forgetPasswordResponse class="text-danger text-center mb-2"></div>
-                <button type="submit" id="forgetPasswordSubmit" name="forgetPasswordSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
-                <button #forgetPasswordReset type="reset" name="forgetPasswordReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
-            </form>
+            <app-forget-password></app-forget-password>
             <button type="button" (click)="pushSignIn()" id="signInLink" name="signInLink" class="mt-2 btn btn-md btn-link ml-0 p-0 font-weight-bold" style="color: #0d47a1;font-size: 13px;">Click Here To Sign In</button>
         </div>
+        
         <div class="col-md-1"></div>
+
     </div>
+
 </div>

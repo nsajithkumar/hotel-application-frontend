@@ -1,11 +1,16 @@
 <div class="container" id="logsPage">
+
     <div class="row mt-4">
+
         <div class="col-md-1"></div>
+
         <div class="col-md-10">
             <div class="mb-3 font-weight-bold text-center">Logs</div>
             <div #processStatus class="text-center">Processing...</div>
+
             <div class="table-responsive" *ngIf="logsArray.length != 0">
                 <table class="table table-hover table-sm table-bordered text-center">
+
                     <thead class="bg-light">
                         <tr>
                             <th class="font-weight-bold">S.No</th>
@@ -14,17 +19,24 @@
                             <th class="font-weight-bold">Logged Off</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr *ngFor="let log of logsArray;let i=index">
                             <td>{{i+1}}</td>
                             <td>{{log.customerName}}</td>
                             <td>{{log.loggedOn}}</td>
-                            <td>{{log.loggedOff}}</td>
+                            <td *ngIf="log.loggedOff != null || log.loggedOff != ''">{{log.loggedOff}}</td>
+                            <td *ngIf="log.loggedOff == null || log.loggedOff == ''">-</td>
                         </tr>
                     </tbody>
+                    
                 </table>
             </div>
+
         </div>
+
         <div class="col-md-1"></div>
+
     </div>
+
 </div>

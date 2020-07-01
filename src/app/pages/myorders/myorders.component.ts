@@ -40,7 +40,6 @@ export class MyordersComponent implements OnInit {
           this.pResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
         }
         // console.log(res);
-
       }, (error) => {
         this.pResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
         // console.log(error);

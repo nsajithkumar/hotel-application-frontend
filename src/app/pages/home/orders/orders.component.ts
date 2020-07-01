@@ -11,17 +11,9 @@ export class OrdersComponent implements OnInit {
 
   ordersArray = [];
 
-  role: string;
-
   @ViewChild('processResponse', {static: true}) pResp: ElementRef;
 
   constructor(public orderServices:OrderService) {
-
-    this.role = sessionStorage.getItem('role');
-
-    if(this.role == "0") {
-      location.href = "/";
-    }
 
     this.orderServices.readAll().subscribe(
       (res: any) => {

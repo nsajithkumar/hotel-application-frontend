@@ -1,0 +1,13 @@
+.form-control{
+    
+    background: transparent;
+    color: #000000;
+
+    &:focus {
+        background-color: transparent;
+        border-color: #ced4da;
+        box-shadow: none;
+        color: #000000;
+    }
+    
+}

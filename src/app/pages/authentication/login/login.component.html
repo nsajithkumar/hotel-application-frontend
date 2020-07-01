@@ -1,0 +1,22 @@
+<form #loginForm>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text"><font color="black"><i class="fas fa-user"></i></font></span>
+        </div>
+        <input type="email" #loginEmailId name="loginEmailId" class="form-control" placeholder="E-Mail Id" required />
+    </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text"><font color="black"><i class="fas fa-lock"></i></font></span>
+        </div>
+        <input type="password" #loginPassword name="loginPassword" class="form-control" placeholder="Password" required />
+    </div>
+    
+    <div #loginResponse class="text-danger text-center mb-2"></div>
+    
+    <button type="submit" id="loginSubmit" name="loginSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
+    <button #loginReset type="reset" name="loginReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
+
+</form>

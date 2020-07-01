@@ -1,0 +1,97 @@
+<div class="row mt-4">
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-10">
+        <div class="mb-3 font-weight-bold text-center">Added Admins</div>
+        <div #processStatus class="text-center">Processing...</div>
+
+        <div class="table-responsive" *ngIf="adminsArray.length != 0">
+            <table class="table table-hover table-sm table-bordered text-center">
+
+                <thead class="bg-light">
+                    <tr>
+                        <th class="font-weight-bold">S.No</th>
+                        <th class="font-weight-bold">Name</th>
+                        <th class="font-weight-bold">E-Mail ID</th>
+                        <th class="font-weight-bold">Mobile Number</th>
+                        <th class="font-weight-bold">Added On</th>
+                        <th class="font-weight-bold">Updated On</th>
+                        <th class="font-weight-bold">Edit</th>
+                        <th class="font-weight-bold">Delete</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let admin of adminsArray; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{admin.username}}</td>
+                        <td>{{admin.emailId}}</td>
+                        <td  *ngIf="admin.mobileNumber != null">{{admin.mobileNumber}}</td>
+                        <td  *ngIf="admin.mobileNumber == null">-</td>
+                        <td>{{admin.createdOn}}</td>
+                        <td>{{admin.updatedOn}}</td>
+                        <td><span data-target="#updateAdmin" data-toggle="modal" (click)="editAdmin(admin)"><i class="fas fa-edit"></i></span></td>
+                        <td><span (click)="deleteAdmin(admin)"><i class="fas fa-trash-alt"></i></span></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-md-1"></div>
+    
+</div>
+
+<div class="modal fade" id="updateAdmin" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-sm" role="document">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Admin</h5>
+          <button type="button" #modalClose class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form #modalForm>
+
+            <div class="modal-body">
+
+                <input type="text" #modelProfileId name="modalProfileId" hidden />
+                
+                <div class="input-group mb-3">
+                    <div class="input-group-prepand">
+                        <span class="input-group-text"><font color="black"><i class="fas fa-user"></i></font></span>
+                    </div>
+                    <input type="text" #modalUname name="modalUname" class="form-control" placeholder="Username" required />
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepand">
+                        <span class="input-group-text pl-3 pr-3"><font color="black"><i class="fas fa-mobile"></i></font></span>
+                    </div>
+                    <input type="number" #modalMobileNumber (input) = "modalMobileNumberHandler()" name="modalMobileNumber" class="form-control" placeholder="Mobile Number" />
+                </div>
+
+                <div #modalResponse class="text-center text-danger"></div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button #modalSubmit type="submit" class="btn btn-sm btn-purple">Proceed</button>
+                <button #modalReset type="reset" class="btn btn-sm btn-purple">Reset</button>
+            </div>
+
+        </form>
+
+      </div>
+      
+    </div>
+    
+</div>

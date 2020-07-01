@@ -23,17 +23,10 @@ export class ProductsViewComponent implements OnInit {
   customerId: string; 
   customerName: string;
 
-  role: string;
-
   constructor(public productServices: ProductService, public orderServices: OrderService) { 
+
     this.customerId = sessionStorage.getItem('profileId');
     this.customerName = sessionStorage.getItem('name');
-
-    this.role = sessionStorage.getItem('role');
-
-    if(this.role == "1" || this.role == "1") {
-      location.href = "/";
-    }
 
     this.productServices.readAll().subscribe(
       (res: any) => {
@@ -58,8 +51,10 @@ export class ProductsViewComponent implements OnInit {
   }
 
   addToCart(product) {
+
     let flag = 1;
     let amount = 0;
+
     this.cartArray.forEach((current) => {
       if(current.productId === product._id) {
         current.quantity += 1;
@@ -68,7 +63,8 @@ export class ProductsViewComponent implements OnInit {
         amount = product.price;
         return;
       }
-    })
+    });
+
     if(flag) {
       this.cartArray.push({
         productId: product._id,
@@ -78,11 +74,14 @@ export class ProductsViewComponent implements OnInit {
       });
       amount = product.price;
     }
+
     this.totalAmount += amount;
     this.pResp.nativeElement.innerText = "Added Succesfully!";
+
     setTimeout(() => {
       this.pResp.nativeElement.innerText= "";
     }, 500);
+
   }
 
   placeOrder() {
@@ -98,6 +97,7 @@ export class ProductsViewComponent implements OnInit {
       productAmount.push(this.cartArray[i].price);
       productQuantity.push(this.cartArray[i].quantity);
     }
+
     let data = {
       customerId: this.customerId,
       customerName: this.customerName,
@@ -110,11 +110,13 @@ export class ProductsViewComponent implements OnInit {
       (res: any) => {
         if(res.status === 200) {
           this.mResp.nativeElement.innerText = "Order Placed Successfully!";
+
           setTimeout(() => {
             this.cartArray = [];
             this.mResp.nativeElement.innerText = "";
             this.mClose.nativeElement.click();
           }, 1000);
+
         } else {
           this.mResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
         }
@@ -123,7 +125,6 @@ export class ProductsViewComponent implements OnInit {
       }, (error) => {
         this.mResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
         // console.log(error);
-
       }
     );
 

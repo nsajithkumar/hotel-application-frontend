@@ -22,12 +22,14 @@ export class ResetPasswordComponent implements OnInit {
   constructor(public profileServices: ProfileService, public actRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+
     this.actRoute.paramMap.subscribe(params => {
       this.profileId = params.get('id');
     });
 
-    this.resPassForm.nativeElement.addEventListener("submit", (e) => {
-      e.preventDefault();
+    this.resPassForm.nativeElement.addEventListener("submit", (event) => {
+
+      event.preventDefault();
 
       this.resPassResp.nativeElement.innerText = "Progressing...";
 
@@ -39,16 +41,18 @@ export class ResetPasswordComponent implements OnInit {
       this.profileServices.update(data).subscribe(
         (res: any) => {
           if(res.status === 200) {
+
             this.resPassResp.nativeElement.innerText = "Password Updated Successfully!";
             this.resPassReset.nativeElement.click();
+
             setTimeout(()=> {
               location.href = "/authentication";
             }, 1000);
+
           } else {
             this.resPassResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
           }
           // console.log(res);
-
         }, (error) => {
           this.resPassResp.nativeElement.innerText = "Oops! Problem Occured, Please Try Again Later.";
           // console.log(error);

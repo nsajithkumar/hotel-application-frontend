@@ -1,0 +1,43 @@
+<form #adminsForm>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text"><font color="black"><i class="fas fa-user"></i></font></span>
+        </div>
+        <input type="text" #username name="username" class="form-control" placeholder="Username" required />
+    </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text"><font color="black"><i class="fas fa-at"></i></font></span>
+        </div>
+        <input type="email" #email name="email" class="form-control" placeholder="E-Mail ID" required />
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text pl-3 pr-3"><font color="black"><i class="fas fa-mobile"></i></font></span>
+        </div>
+        <input type="number" #mobileNumber (input)="mobileNumberHandler()" name="mobileNumber" class="form-control" placeholder="Mobile Number" />
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text "><font color="black"><i class="fas fa-key"></i></font></span>
+        </div>
+        <input type="password" #password (input)="passwordHandler()" name="password" class="form-control" placeholder="Password" required />
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text"><font color="black"><i class="fas fa-key"></i></font></span>
+        </div>
+        <input type="password" #confirmPassword (input)="passwordHandler()" name="confirmPassword" class="form-control" placeholder="Confirm Password" required />
+    </div>
+    
+    <div #adminsResponse class="text-danger text-center mb-2"></div>
+    
+    <button #adminsSubmit type="submit" name="adminsSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
+    <button #adminsReset type="reset" name="adminsReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
+
+</form>

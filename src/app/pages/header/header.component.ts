@@ -34,21 +34,18 @@ export class HeaderComponent implements OnInit {
           if(res.status === 200) {
             sessionStorage.clear();
             location.href = "/authentication";
-          } else {
-            alert("Oops! Problem Occured, Please Try Again Later.");
           }
           // console.log(res);
   
         }, (error) => {
-            alert("Oops! Problem Occured, Please Try Again Later.");
             // console.log(error);
         }
       );
+
     } else {
       sessionStorage.clear();
       location.href = "/authentication";
     }
-    
 
   }
 

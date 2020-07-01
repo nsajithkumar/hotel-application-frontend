@@ -1,0 +1,26 @@
+<form #productsForm>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text"><font color="black"><i class="fas fa-signature"></i></font></span>
+        </div>
+        <input type="text" #productName name="productName" class="form-control" placeholder="Product Name" required />
+    </div>
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepand">
+            <span class="input-group-text pl-3 pr-3"><font color="black"><i class="fas fa-rupee-sign"></i></font></span>
+        </div>
+        <input type="number" #amount name="amount" class="form-control" placeholder="Amount" required />
+    </div>
+    
+    <textarea #description name="description" rows="3" class="form-control mb-3" placeholder="Description"></textarea>
+    
+    <input #productPic type="file" name="productPic" class="mb-3" required />
+    
+    <div #productsResponse class="text-danger text-center mb-2"></div>
+    
+    <button #productsSubmit type="submit" name="productsSubmit" class="btn btn-sm btn-purple rounded ml-0">Proceed</button>
+    <button #productsReset type="reset" name="productsReset" class="btn btn-sm btn-purple rounded ml-0">Reset</button>
+
+</form>
