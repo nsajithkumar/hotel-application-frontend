@@ -11,6 +11,11 @@ import { MyordersComponent } from './pages/myorders/myorders.component';
 
 const routes: Routes = [
   {
+    path:'',
+    redirectTo: '/authentication',
+    pathMatch: 'full'
+  },
+  {
     path:'authentication',
     component:AuthenticationComponent
   },
