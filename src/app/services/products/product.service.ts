@@ -10,27 +10,27 @@ export class ProductService {
   constructor(public httpClient: HttpClient) { }
 
   create(data) {
-    let url = "https://v7backend.herokuapp.com/product/create";
+    let url = "https://hotel-application-backend.herokuapp.com/product/create";
     return this.httpClient.post(url, data);
   }
 
   readAll() {
-    let url = "https://v7backend.herokuapp.com/product/read";
+    let url = "https://hotel-application-backend.herokuapp.com/product/read";
     return this.httpClient.get(url);
   }
 
   read(data) {
-    let url = "https://v7backend.herokuapp.com/product/read";
+    let url = "https://hotel-application-backend.herokuapp.com/product/read";
     return this.httpClient.post(url, data);
   }
 
   update(data) {
-    let url = "https://v7backend.herokuapp.com/product/update";
+    let url = "https://hotel-application-backend.herokuapp.com/product/update";
     return this.httpClient.post(url, data);
   }
 
   delete(data) {
-    let url = "https://v7backend.herokuapp.com/product/delete";
+    let url = "https://hotel-application-backend.herokuapp.com/product/delete";
     return this.httpClient.post(url, data);
   }
 

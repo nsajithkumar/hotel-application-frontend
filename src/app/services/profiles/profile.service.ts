@@ -10,27 +10,27 @@ export class ProfileService {
   constructor(public httpClient: HttpClient) { }
 
   create(data) {
-    let url = "https://v7backend.herokuapp.com/profile/create";
+    let url = "https://hotel-application-backend.herokuapp.com/profile/create";
     return this.httpClient.post(url, data);
   }
 
   readAll() {
-    let url = "https://v7backend.herokuapp.com/profile/read";
+    let url = "https://hotel-application-backend.herokuapp.com/profile/read";
     return this.httpClient.get(url);
   }
 
   read(data) {
-    let url = "https://v7backend.herokuapp.com/profile/read";
+    let url = "https://hotel-application-backend.herokuapp.com/profile/read";
     return this.httpClient.post(url, data);
   }
 
   update(data) {
-    let url = "https://v7backend.herokuapp.com/profile/update";
+    let url = "https://hotel-application-backend.herokuapp.com/profile/update";
     return this.httpClient.post(url, data);
   }
 
   delete(data) {
-    let url = "https://v7backend.herokuapp.com/profile/delete";
+    let url = "https://hotel-application-backend.herokuapp.com/profile/delete";
     return this.httpClient.post(url, data);
   }
 
